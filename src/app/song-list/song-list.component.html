@@ -1,0 +1,9 @@
+<h2>My Songs</h2>
+
+<ul class="songs">
+  <li *ngFor="let song of songs">
+    <a routerLink="/editor/{{song.id}}">
+      <span class="badge">{{song.title}}</span>
+    </a>
+  </li>
+</ul>

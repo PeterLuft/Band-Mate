@@ -1,0 +1,10 @@
+<h3>Home</h3>
+
+<div class="grid grid-pad">
+  <a *ngFor="let song of songs" class="col-1-4"
+     routerLink="/editor/{{song.id}}">
+    <div class="module song">
+      <h4>{{song.title}}</h4>
+    </div>
+  </a>
+</div>

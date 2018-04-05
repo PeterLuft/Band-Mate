@@ -1,0 +1,39 @@
+<p>
+  This is where song edits go
+</p>
+
+
+<h2>{{song.title | uppercase}}</h2>
+<span>id: </span>{{song.id}}
+
+<div>
+  <button (click)="goBack()">
+    Back
+  </button>
+</div>
+
+<div>
+  <ul class="parts">
+    <li
+      *ngFor="let part of song.parts"
+      [class.selected]="part === selectedPart"
+      (click)="onSelect(part)">
+      <div class="badge">
+        {{part.name}}
+      </div>
+      <div>
+        {{part.description}}
+      </div>
+      <div>
+        {{part.notes}}
+      </div>
+      <div>
+        {{part.num}}
+      </div>
+    </li>
+  </ul>
+
+
+  <app-part-detail [part]="selectedPart"></app-part-detail>
+
+</div>
