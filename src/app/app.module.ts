@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
@@ -12,6 +12,9 @@ import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SongListComponent } from './song-list/song-list.component';
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import { InMemoryDataService }  from './in-memory-data.service';
+import { SongSearchComponent } from './song-search/song-search.component';
 
 
 @NgModule({
@@ -21,11 +24,16 @@ import { SongListComponent } from './song-list/song-list.component';
     PartDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    SongListComponent
+    SongListComponent,
+    SongSearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
     AppRoutingModule
   ],
   providers: [SongService, MessageService],

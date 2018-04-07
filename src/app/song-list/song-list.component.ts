@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Song} from "../../song";
 import {SongService} from "../song.service";
 
@@ -11,12 +11,36 @@ export class SongListComponent implements OnInit {
 
   songs: Song[];
 
-  getSongs():void{
+  getSongs(): void {
     this.songService.getSongs()
-      .subscribe(data => this.songs = data)
+      .subscribe(data => {
+        this.songs = data;
+        console.log(this.songs);
+      })
   }
 
-  constructor(private songService: SongService) { }
+  add(title: string): void {
+    if (!title) {
+      return;
+    }
+    this.songService.addSong(
+      {
+        title: title,
+        parts: []
+      } as Song)
+      .subscribe(song => {
+        this.songs.push(song);
+      });
+  }
+
+  delete(song: Song): void {
+    this.songs = this.songs.filter(s => s !== song);
+    this.songService.deleteSong(song).subscribe();
+
+  }
+
+  constructor(private songService: SongService) {
+  }
 
   ngOnInit() {
     this.getSongs();

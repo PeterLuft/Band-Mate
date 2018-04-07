@@ -1,39 +1,80 @@
-<p>
-  This is where song edits go
-</p>
+<div *ngIf="song">
 
+  <button (click)="save()">Done</button>
 
-<h2>{{song.title | uppercase}}</h2>
-<span>id: </span>{{song.id}}
+  <h2>{{song.title | uppercase}}</h2>
 
-<div>
-  <button (click)="goBack()">
-    Back
-  </button>
-</div>
+  <div class="row">
+    <div class="col-7">
+      <div id="roadmap">
+        <h3>Road Map</h3>
+        <ul class="parts">
+          <li class="list-group-item part"
+              *ngFor="let part of song.parts"
+              [class.selected]="part === selectedPart"
+              (click)="onSelect(part)"
+              draggable="true">
+            <div class="card">
+              <div class="card-body">
 
-<div>
-  <ul class="parts">
-    <li
-      *ngFor="let part of song.parts"
-      [class.selected]="part === selectedPart"
-      (click)="onSelect(part)">
-      <div class="badge">
-        {{part.name}}
+                <h4>
+                  {{part.name}}
+                </h4>
+                <p>
+                  {{part.description}}
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h4>Notes</h4>
+              <p>{{part.notes}}</p>
+
+            </div>
+            <div>
+              {{part.num}}
+            </div>
+            <button class="delete" title="delete part" (click)="delete(part)">x</button>
+          </li>
+        </ul>
       </div>
-      <div>
-        {{part.description}}
-      </div>
-      <div>
-        {{part.notes}}
-      </div>
-      <div>
-        {{part.num}}
-      </div>
-    </li>
-  </ul>
+    </div>
 
+    <div class="col-5">
+      <div *ngIf="baseParts" id="toolbox">
+
+        <h3>Toolbox</h3>
+
+        <ul>
+          <li *ngFor="let basePart of baseParts"
+              (click)="add(basePart)"
+          >
+            <strong>{{basePart.name}}</strong>
+            {{basePart.description}}
+
+          </li>
+        </ul>
+
+        <h4>Add a part to toolbox:</h4>
+        <label>Part name:
+          <input #partName/>
+        </label>
+        <label>Part description:
+          <input #partDesc/>
+        </label>
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button
+          (click)="addBasePart({name: partName.value, desc: partDesc.value}); partName.value='';partDesc.value='';">
+          add
+        </button>
+      </div>
+    </div>
+  </div>
 
   <app-part-detail [part]="selectedPart"></app-part-detail>
 
+
 </div>
+
+
+

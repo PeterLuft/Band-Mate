@@ -1,0 +1,15 @@
+#roadmap{
+  border: 1px solid red;
+
+}
+
+#toolbox{
+  border: 1px solid red;
+}
+
+
+.list-group-item .part{
+  border: 1px solid black;
+  list-style: none;
+  text-align: left;
+}
