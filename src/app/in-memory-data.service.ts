@@ -30,13 +30,13 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             name: "Verse",
             description: "Guitar only",
-            notes: "",
+            notes: "Gtr 1 start the song, keep it mellow at first. Drums can do little swells or whatever.",
             num: 2
           },
           {
             name: "Pre-Chorus",
-            description: "Chorus",
-            notes: "",
+            description: "Ring out notes",
+            notes: "We will really kick into gear for the next part, so make it count.",
             num: 4
           },
           {

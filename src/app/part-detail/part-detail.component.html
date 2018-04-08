@@ -1,11 +1,28 @@
-<div *ngIf="part" class="editZone">
-  <label>Part:
-    <input [(ngModel)]="part.name" placeholder="Part">
-  </label>
-  <label>Description:
-    <input [(ngModel)]="part.description" placeholder="Description">
-  </label>
-  <label>Notes:
-    <input [(ngModel)]="part.notes" placeholder="Notes">
-  </label>
+<div *ngIf="part" id="editPart">
+
+
+  <div class="card border-primary">
+    <div class="card-header bg-primary">
+
+      <strong class="text-light">
+        Edit Part
+      </strong>
+    </div>
+
+    <div class="card-body text-primary">
+      <div class="form-group">
+        <label for="partName">Name</label>
+        <input type="text" class="form-control" id="partName" aria-describedby="partName" [(ngModel)]="part.name" placeholder="Part">
+
+        <label for="partDesc">Description</label>
+        <input type="text" class="form-control" aria-describedby="partName" id="partDesc" [(ngModel)]="part.description" placeholder="Description">
+
+        <label for="partNotes">Notes</label>
+        <textarea class="form-control" id="partNotes" [(ngModel)]="part.notes" placeholder="Notes"></textarea>
+
+      </div>
+    </div>
+
+  </div>
+
 </div>

@@ -3,75 +3,128 @@
   <button (click)="save()">Done</button>
 
   <h2>{{song.title | uppercase}}</h2>
+  <button class="btn btn-secondary" type="button" (click)="toggleDetails()">
+    {{detailMode ? 'Hide details' : 'Show details'}}
+  </button>
 
   <div class="row">
     <div class="col-7">
       <div id="roadmap">
-        <h3>Road Map</h3>
-        <ul class="parts">
-          <li class="list-group-item part"
-              *ngFor="let part of song.parts"
-              [class.selected]="part === selectedPart"
-              (click)="onSelect(part)"
-              draggable="true">
-            <div class="card">
-              <div class="card-body">
 
-                <h4>
+        <div class="card">
+          <div class="card-header">
+            <strong>Road Map</strong>
+          </div>
+
+
+          <div class="card-body" *ngIf="!detailMode">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"
+                  *ngFor="let part of song.parts"
+                  [class.selected]="part === selectedPart">
+                <p style="float: left">
                   {{part.name}}
-                </h4>
-                <p>
+                </p>
+                <p style="float: right">
+                  ×{{part.num}}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-body" *ngIf="detailMode">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"
+                  *ngFor="let part of song.parts"
+                  [class.active]="part === selectedPart"
+                  (click)="onSelect(part)"
+                  draggable="true">
+
+                <div class="float-right">
+                  <button class="btn btn-danger text-right" title="delete part" (click)="delete(part)">Remove
+                  </button>
+                </div>
+                <h3>
+                  {{part.name}} ×{{part.num}}
+                </h3>
+
+                <p class="lead">
                   {{part.description}}
                 </p>
-              </div>
-            </div>
 
-            <div>
-              <h4>Notes</h4>
-              <p>{{part.notes}}</p>
+                <div>
+                  <p><small>{{part.notes}}</small></p>
 
-            </div>
-            <div>
-              {{part.num}}
-            </div>
-            <button class="delete" title="delete part" (click)="delete(part)">x</button>
-          </li>
-        </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+
       </div>
     </div>
 
     <div class="col-5">
+      <!--<div class="row">-->
       <div *ngIf="baseParts" id="toolbox">
 
-        <h3>Toolbox</h3>
+        <div class="card">
+          <div class="card-header">
+            <strong>Toolbox</strong>
+          </div>
 
-        <ul>
-          <li *ngFor="let basePart of baseParts"
-              (click)="add(basePart)"
-          >
-            <strong>{{basePart.name}}</strong>
-            {{basePart.description}}
+          <div class="card-body">
+            <div class="dropdown">
+              <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="toolboxDropdown"
+                      data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false"
+              >
+                My parts
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button *ngFor="let basePart of baseParts"
+                        (click)="add(basePart)" class="dropdown-item" type="button">{{basePart.name}}
+                </button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" type="button" (click)="toggleCreateBasePart(true)">
+                  Create new part
+                </button>
 
-          </li>
-        </ul>
+              </div>
+            </div>
+          </div>
 
-        <h4>Add a part to toolbox:</h4>
-        <label>Part name:
-          <input #partName/>
-        </label>
-        <label>Part description:
-          <input #partDesc/>
-        </label>
-        <!-- (click) passes input value to add() and then clears the input -->
-        <button
-          (click)="addBasePart({name: partName.value, desc: partDesc.value}); partName.value='';partDesc.value='';">
-          add
-        </button>
+          <div *ngIf="basePartCreate" class="card-body">
+            <h4>Create a new part:</h4>
+            <div class="form-group">
+              <label for="basePartName">Name:</label>
+              <input #partName type="text" class="form-control" id="basePartName" aria-describedby="basePartName"/>
+
+              <label for="basePartDesc">Part description:</label>
+              <input #partDesc type="text" class="form-control" id="basePartDesc" aria-describedby="basePartDesc"/>
+
+              <button class="btn btn-primary" type="button"
+                      (click)="addBasePart({name: partName.value, desc: partDesc.value}); partName.value='';partDesc.value='';">
+                Add to toolbox
+              </button>
+              <button class="btn btn-secondary" type="button"
+                      (click)="toggleCreateBasePart(false)">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </div>
+      <br/>
+      <app-part-detail [part]="selectedPart"></app-part-detail>
 
-  <app-part-detail [part]="selectedPart"></app-part-detail>
+    </div>
+
+    <br/>
+  </div>
 
 
 </div>

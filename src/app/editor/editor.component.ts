@@ -17,9 +17,19 @@ export class EditorComponent implements OnInit {
   selectedPart: Part;
   newPart: Part;
   song: Song;
+  basePartCreate: boolean;
+  detailMode: boolean;
 
   onSelect(part: Part): void {
     this.selectedPart = part;
+  }
+
+  toggleCreateBasePart(show): void {
+    this.basePartCreate = show;
+  }
+
+  toggleDetails(): void{
+    this.detailMode = !this.detailMode;
   }
 
   add(base: BasePart): void {
@@ -33,6 +43,7 @@ export class EditorComponent implements OnInit {
 
     this.song.parts.push(this.newPart);
     this.selectedPart = this.newPart;
+    this.toggleCreateBasePart(false);
   }
 
   delete(part: Part): void{
@@ -92,6 +103,7 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.getSong();
     this.getBaseParts();
+    this.detailMode = true;
   }
 
 }
