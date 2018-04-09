@@ -28,39 +28,45 @@ export class InMemoryDataService implements InMemoryDbService {
         title: "Pilot",
         parts: [
           {
+            name: "Intro",
+            description: "Ambient sound",
+            notes: "No instruments, just echoing guitar swells etc",
+            num: 1
+          },
+          {
             name: "Verse",
             description: "Guitar only",
-            notes: "Gtr 1 start the song, keep it mellow at first. Drums can do little swells or whatever.",
-            num: 2
+            notes: "Gtr 1 start the song, keep it mellow at first",
+            num: 4
           },
           {
             name: "Pre-Chorus",
             description: "Ring out notes",
-            notes: "We will really kick into gear for the next part, so make it count.",
-            num: 4
-          },
-          {
-            name: "Interlude",
-            description: "Just hold note",
-            notes: "",
-            num: 2
+            notes: "Just ring out the whole notes on the chords. Kicks in right at the end",
+            num: 1
           },
           {
             name: "Chorus",
-            description: "Pretty mellow",
-            notes: "Drops down, keep it mostly just guitar and keys.",
+            description: "Energetic",
+            notes: "This will be pretty big",
             num: 4
           },
           {
-            name: "Intro",
-            description: "Extra heavy",
-            notes: "Snare hit on the 4, then come in pretty big",
+            name: "Verse",
+            description: "No guitars",
+            notes: "Bass groove should cut through here",
             num: 4
           },
           {
             name: "Pre-Chorus",
             description: "Ring out notes",
-            notes: "We will really kick into gear for the next part, so make it count.",
+            notes: "Same as other one, maybe a little more lead gtr",
+            num: 4
+          },
+          {
+            name: "Chorus",
+            description: "Energetic",
+            notes: "Basically same as other chorus",
             num: 4
           }
         ]
@@ -71,26 +77,26 @@ export class InMemoryDataService implements InMemoryDbService {
         parts: [
           {
             name: "Intro",
-            description: "Very energetic",
-            notes: "",
-            num: 1
+            description: "Very big",
+            notes: "Starts right in with a big sound",
+            num: 4
           },
           {
             name: "Verse",
             description: "Toms on drums",
-            notes: "",
-            num: 2
-          },
-          {
-            name: "Chorus",
-            description: "Mellow chorus",
-            notes: "",
+            notes: "Maybe a little rhythm guitar but no leads",
             num: 4
           },
           {
-            name: "Bridge",
-            description: "Post-rock build",
-            notes: "",
+            name: "Intro",
+            description: "Back to full band",
+            notes: "Same as first intro",
+            num: 2
+          },
+          {
+            name: "Veers",
+            description: "",
+            notes: "More leads this time",
             num: 2
           }
         ]

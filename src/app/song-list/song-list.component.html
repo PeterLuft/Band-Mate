@@ -19,8 +19,6 @@
       <button type="button" class="btn btn-primary mb-3" (click)="add(songTitle.value); songTitle.value=''">
         Add
       </button>
-
-
     </div>
   </div>
 </div>
@@ -30,7 +28,6 @@
   <li *ngFor="let song of songs" class="list-group-item">
     <span>
       <strong>{{song.title}}</strong>
-
 
     <span class="float-right">
        <a class="btn btn-primary mr-2" routerLink="/editor/{{song.id}}">
