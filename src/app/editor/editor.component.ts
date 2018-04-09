@@ -3,8 +3,8 @@ import {Part} from "../../part";
 import {Song} from "../../song";
 import {SongService} from "../song.service";
 import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
 import {BasePart} from "../../base-part";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-editor',
@@ -60,7 +60,7 @@ export class EditorComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+      this.router.navigateByUrl('/mysongs');
   }
 
   getSong(): void {
@@ -73,9 +73,7 @@ export class EditorComponent implements OnInit {
 
   getBaseParts(): void {
     this.songService.getBaseParts().subscribe(data => {
-
       this.baseParts = data;
-      console.log(this.baseParts);
     });
   }
 
@@ -97,7 +95,7 @@ export class EditorComponent implements OnInit {
 
   constructor(private songService: SongService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private router: Router) {
   }
 
   ngOnInit() {

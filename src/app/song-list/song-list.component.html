@@ -1,23 +1,47 @@
 <h2>My Songs</h2>
 
-<div>
-  <h4>Add a song:</h4>
-  <label>Song name:
-    <input #songTitle />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(songTitle.value); songTitle.value=''">
-    add
-  </button>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-secondary mb-3" type="button" data-toggle="collapse" data-target="#addSongField"
+            aria-expanded="false" aria-controls="collapseExample">
+      New song
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="collapse" id="addSongField">
+      <div class="form-group">
+        <label for="createSongName">Song name</label>
+        <input #songTitle type="text" class="form-control" id="createSongName" aria-describedby="songName"/>
+      </div>
+      <button type="button" class="btn btn-primary mb-3" (click)="add(songTitle.value); songTitle.value=''">
+        Add
+      </button>
+
+
+    </div>
+  </div>
 </div>
 
 
-<ul class="songs">
-  <li *ngFor="let song of songs">
-    <a routerLink="/editor/{{song.id}}">
-      <span class="badge">{{song.title}}</span>
+<ul class="list-group">
+  <li *ngFor="let song of songs" class="list-group-item">
+    <span>
+      <strong>{{song.title}}</strong>
+
+
+    <span class="float-right">
+       <a class="btn btn-primary mr-2" routerLink="/editor/{{song.id}}">
+      Edit song
     </a>
-    <button class="delete" title="delete song"
-            (click)="delete(song)">x</button>
+          <button class="btn btn-danger" title="delete song"
+                  (click)="delete(song)">Delete song
+    </button>
+    </span>
+          </span>
+
+
   </li>
 </ul>

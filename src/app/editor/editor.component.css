@@ -1,1 +1,13 @@
 
+#right-col{
+}
+
+#toolbox{
+  position: fixed;
+  top: 32%;
+  width: 35%;
+}
+
+.dropdown-item{
+  cursor: default;
+}

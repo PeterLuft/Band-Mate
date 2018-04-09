@@ -1,11 +1,19 @@
 <div *ngIf="song">
 
-  <button (click)="save()">Done</button>
 
-  <h2>{{song.title | uppercase}}</h2>
-  <button class="btn btn-secondary" type="button" (click)="toggleDetails()">
-    {{detailMode ? 'Hide details' : 'Show details'}}
-  </button>
+  <div class="row">
+    <div class="col-8">
+      <h1>{{song.title}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <button type="button" class="btn btn-primary btn-block" (click)="save()">Done</button>
+    </div>
+  </div>
+
+  <br/>
+
 
   <div class="row">
     <div class="col-7">
@@ -14,6 +22,9 @@
         <div class="card">
           <div class="card-header">
             <strong>Road Map</strong>
+            <button class="btn btn-secondary float-right" type="button" (click)="toggleDetails()">
+              {{detailMode ? 'Hide details' : 'Show details'}}
+            </button>
           </div>
 
 
@@ -23,10 +34,12 @@
                   *ngFor="let part of song.parts"
                   [class.selected]="part === selectedPart">
                 <p style="float: left">
-                  {{part.name}}
+                  <strong>{{part.name}}</strong>
+
                 </p>
                 <p style="float: right">
-                  ×{{part.num}}
+                  <strong> ×{{part.num}}
+                  </strong>
                 </p>
               </li>
             </ul>
@@ -35,26 +48,28 @@
           <div class="card-body" *ngIf="detailMode">
             <ul class="list-group list-group-flush">
               <li class="list-group-item"
+                  style="min-height: 160px;"
                   *ngFor="let part of song.parts"
                   [class.active]="part === selectedPart"
                   (click)="onSelect(part)"
                   draggable="true">
 
-                <div class="float-right">
+                <div class="float-right" *ngIf="part === selectedPart">
                   <button class="btn btn-danger text-right" title="delete part" (click)="delete(part)">Remove
                   </button>
                 </div>
-                <h3>
+                <h4>
                   {{part.name}} ×{{part.num}}
-                </h3>
+                </h4>
 
                 <p class="lead">
                   {{part.description}}
                 </p>
 
                 <div>
-                  <p><small>{{part.notes}}</small></p>
-
+                  <p>
+                    <small>{{part.notes}}</small>
+                  </p>
                 </div>
               </li>
             </ul>
@@ -66,8 +81,7 @@
       </div>
     </div>
 
-    <div class="col-5">
-      <!--<div class="row">-->
+    <div class="col-5" id="right-col">
       <div *ngIf="baseParts" id="toolbox">
 
         <div class="card">
@@ -77,16 +91,20 @@
 
           <div class="card-body">
             <div class="dropdown">
-              <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="toolboxDropdown"
+              <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="toolboxDropdown"
                       data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false"
               >
                 My parts
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button *ngFor="let basePart of baseParts"
-                        (click)="add(basePart)" class="dropdown-item" type="button">{{basePart.name}}
-                </button>
+                <div *ngFor="let basePart of baseParts"
+                        (click)="add(basePart)" class="dropdown-item w-100" type="button">
+                  {{basePart.name}}           <br/>
+
+                  <small>{{basePart.description ? basePart.description : 'No description'}}</small>
+                  <br/>
+                </div>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" type="button" (click)="toggleCreateBasePart(true)">
                   Create new part
@@ -99,17 +117,18 @@
           <div *ngIf="basePartCreate" class="card-body">
             <h4>Create a new part:</h4>
             <div class="form-group">
-              <label for="basePartName">Name:</label>
+              <label for="basePartName">Name</label>
               <input #partName type="text" class="form-control" id="basePartName" aria-describedby="basePartName"/>
 
-              <label for="basePartDesc">Part description:</label>
+              <label for="basePartDesc">Part description</label>
               <input #partDesc type="text" class="form-control" id="basePartDesc" aria-describedby="basePartDesc"/>
 
-              <button class="btn btn-primary" type="button"
+              <br/>
+              <button class="btn btn-primary btn-block" type="button"
                       (click)="addBasePart({name: partName.value, desc: partDesc.value}); partName.value='';partDesc.value='';">
                 Add to toolbox
               </button>
-              <button class="btn btn-secondary" type="button"
+              <button class="btn btn-secondary btn-block" type="button"
                       (click)="toggleCreateBasePart(false)">
                 Cancel
               </button>
@@ -117,10 +136,10 @@
           </div>
 
         </div>
-      </div>
-      <br/>
-      <app-part-detail [part]="selectedPart"></app-part-detail>
+        <br/>
+        <app-part-detail [part]="selectedPart"></app-part-detail>
 
+      </div>
     </div>
 
     <br/>

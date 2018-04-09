@@ -1,7 +1,6 @@
-<div id="search-component">
-  <h4>Song Search</h4>
+<div class="text-center" id="search-component">
 
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <input class="form-control form-control-lg" placeholder="Search for a song..." #searchBox id="search-box" (keyup)="search(searchBox.value)" />
 
   <ul class="search-result">
     <li *ngFor="let song of songs$ | async" >

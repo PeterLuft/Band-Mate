@@ -10,6 +10,8 @@ import {SongService} from "../song.service";
 export class SongListComponent implements OnInit {
 
   songs: Song[];
+  songCreate: boolean;
+
 
   getSongs(): void {
     this.songService.getSongs()
@@ -17,6 +19,10 @@ export class SongListComponent implements OnInit {
         this.songs = data;
         console.log(this.songs);
       })
+  }
+
+  toggleSongCreate(): void {
+    this.songCreate = !this.songCreate;
   }
 
   add(title: string): void {
@@ -44,6 +50,7 @@ export class SongListComponent implements OnInit {
 
   ngOnInit() {
     this.getSongs();
+    this.songCreate = false;
   }
 
 }
