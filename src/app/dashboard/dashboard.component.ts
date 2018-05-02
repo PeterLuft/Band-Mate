@@ -19,7 +19,9 @@ export class DashboardComponent implements OnInit {
 
   getSongs():void{
     this.songService.getSongs()
-      .subscribe(data => this.songs = data)
+      .subscribe(data => {
+        this.songs = data
+      })
   }
 
 }

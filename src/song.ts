@@ -1,7 +1,7 @@
 import {Part} from "./part";
 
 export class Song {
-  id: number;
+  _id: number;
   title: string;
   parts: Part[];
 }

@@ -12,11 +12,12 @@ export class SongListComponent implements OnInit {
   songs: Song[];
   songCreate: boolean;
 
+
   getSongs(): void {
     this.songService.getSongs()
       .subscribe(data => {
+        console.log(data);
         this.songs = data;
-        console.log(this.songs);
       })
   }
 

@@ -31,9 +31,9 @@ import { SongSearchComponent } from './song-search/song-search.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, {dataEncapsulation: false}
+    // ),
     AppRoutingModule
   ],
   providers: [SongService, MessageService],

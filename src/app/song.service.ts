@@ -14,14 +14,14 @@ const httpOptions = {
 @Injectable()
 export class SongService {
 
-  private songsUrl = 'api/songs';
+  private songsUrl = 'http://localhost:3000/songs';
   private partsUrl = 'api/parts';
 
   getSongs(): Observable<Song[]> {
     this.messageService.add('SongService: fetched songs');
     return this.http.get<Song[]>(this.songsUrl)
       .pipe(
-        tap(heroes => this.log('fetched songs')),
+        tap(songs => this.log('fetched songs')),
         catchError(this.handleError('getSongs', []))
       );
   }
@@ -36,9 +36,7 @@ export class SongService {
       );
   }
 
-
-
-  getSong(id: number): Observable<Song> {
+  getSong(id: string): Observable<Song> {
     const url = `${this.songsUrl}/${id}`;
     return this.http.get<Song>(url)
       .pipe(
@@ -48,16 +46,18 @@ export class SongService {
   }
 
   updateSong(song: Song): Observable<any> {
-    return this.http.put(this.songsUrl, song, httpOptions)
+    const id = typeof song === 'number' ? song : song._id;
+
+    return this.http.put(`${this.songsUrl}/${id}`, song, httpOptions)
       .pipe(
-        tap( _ => this.log(`updated song id=${song.id}`)),
+        tap( _ => this.log(`updated song id=${song._id}`)),
         catchError(this.handleError<any>('updated song'))
       )
   }
 
   addSong(newSong: Song): Observable<Song> {
     return this.http.post<Song>(this.songsUrl, newSong, httpOptions).pipe(
-      tap((song: Song) => this.log(`added song with id=${song.id}`)),
+      tap((song: Song) => this.log(`added song with id=${song._id}`)),
       catchError(this.handleError<Song>('addSong'))
     );
   }
@@ -71,7 +71,7 @@ export class SongService {
   }
 
   deleteSong(song: Song | number): Observable<Song> {
-    const id = typeof song === 'number' ? song : song.id;
+    const id = typeof song === 'number' ? song : song._id;
     const url = `${this.songsUrl}/${id}`;
 
     return this.http.delete<Song>(url, httpOptions).pipe(

@@ -64,10 +64,11 @@ export class EditorComponent implements OnInit {
   }
 
   getSong(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.songService.getSong(id)
       .subscribe(data => {
-        this.song = data
+        this.song = data;
+        console.log(this.song);
       })
   }
 
