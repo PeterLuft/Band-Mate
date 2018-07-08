@@ -14,8 +14,11 @@ const httpOptions = {
 @Injectable()
 export class SongService {
 
-  private songsUrl = 'http://localhost:3000/songs';
-  private partsUrl = 'api/parts';
+  //private songsUrl = 'http://localhost:3000/songs';
+  //private partsUrl = 'http://localhost:3000/parts';
+
+  private songsUrl = 'apdi/songs';
+  private partsUrl = 'apdi/parts';
 
   getSongs(): Observable<Song[]> {
     this.messageService.add('SongService: fetched songs');

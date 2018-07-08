@@ -15,6 +15,7 @@ import { SongListComponent } from './song-list/song-list.component';
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import { InMemoryDataService }  from './in-memory-data.service';
 import { SongSearchComponent } from './song-search/song-search.component';
+import { RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -31,9 +32,10 @@ import { SongSearchComponent } from './song-search/song-search.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, {dataEncapsulation: false}
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
+    RouterModule,
     AppRoutingModule
   ],
   providers: [SongService, MessageService],
